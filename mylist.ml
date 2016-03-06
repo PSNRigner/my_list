@@ -87,3 +87,14 @@ let rec for_all f = function
 let rec exists f = function
   | Item(head, rest) -> f head || exists f rest
   | Empty -> false
+
+(* mem : Return true if argument equals a value in the list *)
+let rec mem o = function
+  | Item(head, rest) -> head = o || mem o rest
+  | Empty -> false
+
+(* memq : Return true if argument equals a value in the list (physical equality) *)
+let rec memq o = function
+  | Item(head, rest) -> head == o || memq o rest
+  | Empty -> false
+
