@@ -54,3 +54,17 @@ let rec flatten = function
   | Item(head, rest) -> append head (flatten rest)
   | Empty -> Empty
 
+(* iter : apply function to all elements *)
+let rec iter f = function
+  | Item(head, rest) ->
+    begin
+      f head;
+      iter f rest;
+    end
+  | Empty -> ()
+
+(* map : apply function to all elements and creates new list with return values *)
+let rec map f = function
+  | Item(head, rest) -> let tmp = f head in Item(tmp, map f rest)
+  | Empty -> Empty
+
