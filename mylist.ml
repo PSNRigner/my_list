@@ -77,3 +77,13 @@ let rec fold_left f l = function
 let rec fold_right f l o = match l with
   | Item(head, rest) -> f head (fold_right f rest o)
   | Empty -> o
+
+(* for_all : Apply func to elements, returning true if all is true *)
+let rec for_all f = function
+  | Item(head, rest) -> f head && for_all f rest
+  | Empty -> true
+
+(* exists : Apply func to elements, returning true if one is true *)
+let rec exists f = function
+  | Item(head, rest) -> f head || exists f rest
+  | Empty -> false
