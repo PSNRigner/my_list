@@ -68,3 +68,12 @@ let rec map f = function
   | Item(head, rest) -> let tmp = f head in Item(tmp, map f rest)
   | Empty -> Empty
 
+(* fold_left : Cannot really explain *)
+let rec fold_left f l = function
+  | Item(head, rest) -> fold_left f (f l head) rest
+  | Empty -> l
+
+(* fold_right : Same as fold_left, but in the other sense *)
+let rec fold_right f l o = match l with
+  | Item(head, rest) -> f head (fold_right f rest o)
+  | Empty -> o
