@@ -98,3 +98,15 @@ let rec memq o = function
   | Item(head, rest) -> head == o || memq o rest
   | Empty -> false
 
+(* filter : Return elements that validate condition *)
+let rec __filter__ f o = function
+  | Item(head, rest) ->
+    if
+      f head
+    then
+      __filter__ f (Item(head, o)) rest
+    else
+      __filter__ f o rest
+  | Empty -> rev o
+
+let filter f l = __filter__ f Empty l
