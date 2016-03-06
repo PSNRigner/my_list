@@ -101,8 +101,7 @@ let rec memq o = function
 (* filter : Return elements that validate condition *)
 let rec __filter__ f o = function
   | Item(head, rest) ->
-    if
-      f head
+    if f head
     then
       __filter__ f (Item(head, o)) rest
     else
@@ -110,3 +109,13 @@ let rec __filter__ f o = function
   | Empty -> rev o
 
 let filter f l = __filter__ f Empty l
+
+(* mem_assoc : Return true if argument is found as a key in the pairs list *)
+let rec mem_assoc o = function
+  | Item((key, value), rest) ->
+    if o = key
+    then
+      true
+    else
+      mem_assoc o rest
+  | Empty -> false
