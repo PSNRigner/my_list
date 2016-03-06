@@ -35,3 +35,22 @@ let rec nth my_list n =
         else
           nth rest (n - 1)
       | Empty -> raise(Failure "invalid index (nth)")
+
+(* append : append two lists *)
+let rec append l1 l2 = match l1 with
+  | Item(head, rest) -> Item(head, (append rest l2))
+  | Empty -> l2
+
+(* rev_append : reverse first list and appends it to 2nd list *)
+let rec rev_append l1 l2 = match l1 with
+  | Item(head, rest) -> rev_append rest (Item(head, l2))
+  | Empty -> l2
+
+(* rev : reverse list *)
+let rec rev l = rev_append l Empty
+
+(* flatten : list of lists -> one list *)
+let rec flatten = function
+  | Item(head, rest) -> append head (flatten rest)
+  | Empty -> Empty
+
