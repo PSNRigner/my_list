@@ -119,3 +119,13 @@ let rec mem_assoc o = function
     else
       mem_assoc o rest
   | Empty -> false
+
+(* assoc : Return value associated with argument in the pairs list *)
+let rec assoc o = function
+  | Item((key, value), rest) ->
+    if o = key
+    then
+      value
+    else
+      assoc o rest
+  | Empty -> raise(Not_found "key not found")
